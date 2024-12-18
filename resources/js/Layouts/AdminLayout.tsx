@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group } from "@mantine/core";
+import { AppShell, Burger, Container, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import AppLayout from "./AppLayout";
 
@@ -22,14 +22,17 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
                 withBorder
             >
                 <AppShell.Header>
-                    <Group justify="space-between" px={10} pt={10}>
+                    <Group h={"100%"} justify="space-between" p={10}>
                         <Burger
                             opened={opened}
                             onClick={toggle}
                             hiddenFrom="sm"
                             size="sm"
                         />
-                        <div className="font-bold">Adi Aulia Rahman</div>
+                        <div className="flex justify-between grow">
+                            <div className="font-bold">Admin UI</div>
+                            <div className="font-bold hidden md:block">Adi Aulia Rahman</div>
+                        </div>
                     </Group>
                 </AppShell.Header>
 
@@ -41,7 +44,10 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
                     <div>Navbar</div>
                 </AppShell.Navbar>
 
-                <AppShell.Main>{children}</AppShell.Main>
+                {/* Content */}
+                <AppShell.Main>
+                    <Container>{children}</Container>
+                </AppShell.Main>
             </AppShell>
         </AppLayout>
     );
