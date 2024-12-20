@@ -19,7 +19,6 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
     return (
         <AppLayout>
             <AppShell
-                header={{ height: 60 }}
                 navbar={{
                     width: 300,
                     breakpoint: "sm",
@@ -28,40 +27,57 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
                 padding="md"
                 withBorder
             >
-                <AppShell.Header>
-                    <HeaderMenu opened={opened} toggle={toggle} />
-                </AppShell.Header>
-
                 <AppShell.Navbar p="md">
+                    {/* Logo and Brand */}
+                    <Group px={10} mb={25} justify="space-between">
+                        <div className="flex gap-1 items-center md:justify-center">
+                            <IconAdCircleFilled
+                                className="text-blue-600"
+                                size={40}
+                            />
+                            <div>
+                                <div className="text-lg font-semibold">
+                                    AD Admin
+                                </div>
+                                <div className="text-xs -mt-2 font-light text-slate-400">
+                                    Created By Adi
+                                </div>
+                            </div>
+                        </div>
+
+                        <Burger
+                            opened={opened}
+                            onClick={toggle}
+                            hiddenFrom="sm"
+                            size="sm"
+                        />
+                    </Group>
+
+                    {/* Navbar Menu */}
                     <NavbarMenu
                         menu={[
                             {
                                 label: "Dashboard",
                                 icon: IconHome2,
                                 href: "/dashboard",
-                                active: true,
                             },
                             {
                                 label: "Settings",
                                 icon: IconAdCircleFilled,
                                 href: "/settings",
-                                active: false,
                             },
                             {
                                 label: "Components",
                                 icon: IconLayoutGrid,
                                 href: "/components",
-                                active: false,
                                 sublinks: [
                                     {
                                         label: "Button",
                                         href: "/components/button",
-                                        active: false,
                                     },
                                     {
                                         label: "Input",
                                         href: "/components/input",
-                                        active: false,
                                     },
                                 ],
                             },
@@ -70,7 +86,10 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
                 </AppShell.Navbar>
 
                 {/* Content */}
-                <AppShell.Main>{children}</AppShell.Main>
+                <AppShell.Main>
+                    <HeaderMenu opened={opened} toggle={toggle} />
+                    <main>{children}</main>
+                </AppShell.Main>
             </AppShell>
         </AppLayout>
     );

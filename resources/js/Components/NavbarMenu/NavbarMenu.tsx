@@ -5,11 +5,9 @@ type Menu = {
     label: string;
     icon: React.FC<any>;
     href: string;
-    active: boolean;
     sublinks?: {
         label: string;
         href: string;
-        active: boolean;
     }[];
 };
 
@@ -18,37 +16,31 @@ type Props = {
 };
 
 // Navbar Item Components
-const NavbarItem: React.FC<Menu> = ({
-    label,
-    icon: Icon,
-    href,
-    active,
-    sublinks,
-}) => {
+const NavbarItem: React.FC<Menu> = ({ label, icon: Icon, href, sublinks }) => {
     const { url } = usePage();
     return (
         <NavLink
             className="rounded-lg"
             leftSection={
-                <ActionIcon
-                            variant="gradient"
-                            size="lg"
-                            gradient={{ from: "blue", to: "cyan", deg: 90 }}
-                        >
-                            <Icon size={22} />
-                        </ActionIcon>
+                <ActionIcon size="lg">
+                    <Icon size={22} />
+                </ActionIcon>
             }
             label={label}
             active={url.startsWith(href) && !sublinks}
             onClick={() => (!sublinks ? router.visit(href) : null)}
-            defaultOpened={(sublinks && url.startsWith(href))}
+            defaultOpened={sublinks && url.startsWith(href)}
             childrenOffset={20}
         >
             {sublinks?.map((item, index) => (
-                <div className={`border-l-2 ${url.startsWith(item.href) ? 'border-blue-600' : ''}`}>
+                <div
+                    key={index}
+                    className={`border-l-2 ${
+                        url.startsWith(item.href) ? "border-blue-600" : ""
+                    }`}
+                >
                     <NavLink
-                    className="rounded-r-lg"
-                        key={index}
+                        className="rounded-r-lg"
                         label={item.label}
                         active={url.startsWith(item.href)}
                         onClick={() => router.visit(item.href)}

@@ -1,4 +1,4 @@
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
@@ -18,9 +18,7 @@ const AppLayout: React.FC<Props> = ({ children }) => {
     return (
         <MantineProvider>
             <Notifications />
-            <ModalsProvider>
-            <main>{children}</main>
-            </ModalsProvider>
+            <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>
     );
 };
